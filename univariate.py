@@ -46,4 +46,12 @@ class univar():
 
         for col in greater_outliers:
             dataset[col][dataset[col] > descriptive[col]["greater"]]= descriptive[col]["greater"]
+            
+    def freq_table(colname, dataset):
+        frequency_table = pd.DataFrame(columns = ["Unique_Values", "Frequency", "Relative_Frequecy","CumSum"])
+        frequency_table["Unique_Values"] = dataset[colname].value_counts().index
+        frequency_table["Frequency"] = dataset[colname].value_counts().values
+        frequency_table["Relative_Frequecy"] = frequency_table["Frequency"] / len(dataset[colname]) # len of data set is total number of rows
+        frequency_table["CumSum"] = frequency_table["Relative_Frequecy"].cumsum()
+        return frequency_table
         
